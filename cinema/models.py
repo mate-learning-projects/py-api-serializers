@@ -27,6 +27,10 @@ class Actor(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
 
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
     def __str__(self):
         return self.first_name + " " + self.last_name
 
@@ -97,7 +101,8 @@ class Ticket(models.Model):
 
     def __str__(self):
         return (
-            f"{str(self.movie_session)} (row: {self.row}, seat: {self.seat})")
+            f"{str(self.movie_session)} (row: {self.row}, seat: {self.seat})"
+        )
 
     class Meta:
         unique_together = ("movie_session", "row", "seat")
